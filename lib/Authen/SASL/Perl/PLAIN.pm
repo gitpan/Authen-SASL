@@ -7,7 +7,7 @@ package Authen::SASL::Perl::PLAIN;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = "1.03";
+$VERSION = "1.04";
 @ISA	 = qw(Authen::SASL::Perl);
 
 my %secflags = (
@@ -28,7 +28,7 @@ sub client_start {
   my @parts = map {
     my $v = $self->_call($_);
     defined($v) ? $v : ''
-  } qw(user authname pass);
+  } qw(authname user pass);
 
   join("\0", @parts);
 }

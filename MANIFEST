@@ -1,9 +1,5 @@
-ChangeLog
-MANIFEST
-META.yml
-Makefile.PL
-SIGNATURE
 api.txt
+Changes
 compat_pl
 example_pl
 inc/Module/Install.pm
@@ -24,6 +20,10 @@ lib/Authen/SASL/Perl/DIGEST_MD5.pm
 lib/Authen/SASL/Perl/EXTERNAL.pm
 lib/Authen/SASL/Perl/LOGIN.pm
 lib/Authen/SASL/Perl/PLAIN.pm
+Makefile.PL
+MANIFEST
+META.yml
+SIGNATURE
 t/anon.t
 t/callback.t
 t/cram_md5.t
