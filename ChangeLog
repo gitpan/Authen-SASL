@@ -1,3 +1,15 @@
+2003-01-21 19:15  Graham Barr
+
+	* lib/Authen/SASL.pm:
+
+	Release 2.03
+	
+2003-01-21 12:22  Graham Barr
+
+	* lib/Authen/SASL/Perl/LOGIN.pm:
+
+	Fix LOGIN mechanism to respond with the username when prompted
+	
 2002-05-28 15:22  Graham Barr
 
 	* lib/Authen/SASL.pm:
