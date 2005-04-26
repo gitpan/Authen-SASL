@@ -19,7 +19,7 @@ my %secflags = (
 );
 
 # some have to be quoted - some don't - sigh!
-my %qdval; @qdval{qw(username realm nonce cnonce digest-uri)} = ();
+my %qdval; @qdval{qw(username authzid realm nonce cnonce digest-uri)} = ();
 
 sub _order { 3 }
 sub _secflags {
@@ -66,6 +66,11 @@ sub client_step    # $self, $server_sasl_credentials
     charset      => $sparams{'charset'},
   );
 
+  my $authzid = $self->_call('authname');
+  if (defined $authzid) {
+    $response{authzid} = $authzid;
+  }
+
   my $serv_name = $self->_call('serv');
   if (defined $serv_name) {
     $response{'digest_uri'} .= '/' . $serv_name;
@@ -77,7 +82,7 @@ sub client_step    # $self, $server_sasl_credentials
 
   my $A1 = join (":", 
     md5(join (":", @response{qw(username realm)}, $password)),
-    @response{qw(nonce cnonce)}
+    @response{defined($authzid) ? qw(nonce cnonce authzid) : qw(nonce cnonce)}
   );
 
   my $A2 = "AUTHENTICATE:" . $response{'digest-uri'};
@@ -116,7 +121,7 @@ Authen::SASL::Perl::DIGEST_MD5 - Digest MD5 Authentication class
 
 =head1 SYNOPSIS
 
-  use Authen::SASL;
+  use Authen::SASL qw(Perl);
 
   $sasl = Authen::SASL->new(
     mechanism => 'DIGEST-MD5',
@@ -129,13 +134,21 @@ Authen::SASL::Perl::DIGEST_MD5 - Digest MD5 Authentication class
 
 =head1 DESCRIPTION
 
-This method implements the DIGEST MD5 SASL algorithm, as described in RFC-2831.
+This method implements the client part of the DIGEST-MD5 SASL algorithm,
+as described in RFC-2831.
+
+This module only implements the I<auth> operation which offers authentication
+but neither integrity protection not encryption.
 
 =head2 CALLBACK
 
 The callbacks used are:
 
 =over 4
+
+=item authname
+
+The authorization id to use after successful authentication
 
 =item user
 
@@ -153,18 +166,20 @@ The service name when authenticating to a replicated service
 
 =head1 SEE ALSO
 
-L<Authen::SASL>
+L<Authen::SASL>,
+L<Authen::SASL::Perl>
 
 =head1 AUTHORS
  
 Graham Barr, Djamel Boudjerda (NEXOR) Paul Connolly, Julian Onions (NEXOR)
 
 Please report any bugs, or post any suggestions, to the perl-ldap mailing list
-<perl-ldap-dev@lists.sourceforge.net>
+<perl-ldap@perl.org>
 
 =head1 COPYRIGHT 
 
-Copyright (c) 2003 Graham Barr, Djamel Boudjerda, Paul Connolly, Julian Onions and Nexor.
+Copyright (c) 2003 Graham Barr, Djamel Boudjerda, Paul Connolly, Julian Onions
+and Nexor.
 All rights reserved. This program is free software; you can redistribute 
 it and/or modify it under the same terms as Perl itself.
 

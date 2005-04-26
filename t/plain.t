@@ -1,9 +1,8 @@
+#!perl
 
-use Authen::SASL;
+use Test::More tests => 5;
 
-@Authen::SASL::Plugins = qw(Authen::SASL::Perl);
-
-print "1..5\n";
+use Authen::SASL qw(Perl);
 
 my $sasl = Authen::SASL->new(
   mechanism => 'PLAIN',
@@ -12,23 +11,17 @@ my $sasl = Authen::SASL->new(
     pass => 'fred',
     authname => 'none'
   },
-) or print "not ";
-print "ok 1\n";
+);
+ok($sasl, 'new');
 
-$sasl->mechanism eq 'PLAIN'
-  or print "not ";
-print "ok 2\n";
+is($sasl->mechanism, 'PLAIN', 'sasl mechanism');
 
 my $conn = $sasl->client_new("ldap","localhost");
 
-$conn->mechanism eq 'PLAIN' or print "not ";
-print "ok 3\n";
+is($conn->mechanism, 'PLAIN', 'conn mechanism');
 
+is($conn->client_start,  "none\0gbarr\0fred", 'client_start');
 
-$conn->client_start eq "none\0gbarr\0fred" or print "not ";
-print "ok 4\n";
-
-print "not " if defined $conn->client_step("xyz") ;
-print "ok 5\n";
+is($conn->client_step("xyz"), undef, 'client_step');
 
 
