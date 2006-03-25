@@ -2,7 +2,10 @@ api.txt
 Changes
 compat_pl
 example_pl
+inc/ExtUtils/AutoInstall.pm
+inc/Module/AutoInstall.pm
 inc/Module/Install.pm
+inc/Module/Install/AutoInstall.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/Fetch.pm
@@ -22,10 +25,11 @@ lib/Authen/SASL/Perl/ANONYMOUS.pm
 lib/Authen/SASL/Perl/CRAM_MD5.pm
 lib/Authen/SASL/Perl/DIGEST_MD5.pm
 lib/Authen/SASL/Perl/EXTERNAL.pm
+lib/Authen/SASL/Perl/GSSAPI.pm
 lib/Authen/SASL/Perl/LOGIN.pm
 lib/Authen/SASL/Perl/PLAIN.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
 META.yml
 SIGNATURE
 t/anon.t

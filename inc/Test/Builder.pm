@@ -1,4 +1,4 @@
-#line 1 "inc/Test/Builder.pm - /System/Library/Perl/5.8.1/Test/Builder.pm"
+#line 1
 package Test::Builder;
 
 use 5.004;
@@ -37,7 +37,7 @@ my @Test_Results = ();  share(@Test_Results);
 my @Test_Details = ();  share(@Test_Details);
 
 
-#line 94
+#line 93
 
 my $Test;
 sub new {
@@ -46,7 +46,7 @@ sub new {
     return $Test;
 }
 
-#line 120
+#line 119
 
 my $Exported_To;
 sub exported_to {
@@ -58,7 +58,7 @@ sub exported_to {
     return $Exported_To;
 }
 
-#line 143
+#line 142
 
 sub plan {
     my($self, $cmd, $arg) = @_;
@@ -97,7 +97,7 @@ sub plan {
     return 1;
 }
 
-#line 190
+#line 189
 
 my $Expected_Tests = 0;
 sub expected_tests {
@@ -113,7 +113,7 @@ sub expected_tests {
 }
 
 
-#line 212
+#line 211
 
 my($No_Plan) = 0;
 sub no_plan {
@@ -121,7 +121,7 @@ sub no_plan {
     $Have_Plan  = 1;
 }
 
-#line 226
+#line 225
 
 sub has_plan {
 	return($Expected_Tests) if $Expected_Tests;
@@ -130,7 +130,7 @@ sub has_plan {
 };
 
 
-#line 242
+#line 241
 
 my $Skip_All = 0;
 sub skip_all {
@@ -146,7 +146,7 @@ sub skip_all {
     exit(0);
 }
 
-#line 276
+#line 275
 
 sub ok {
     my($self, $test, $name) = @_;
@@ -220,7 +220,7 @@ ERR
     return $test ? 1 : 0;
 }
 
-#line 364
+#line 363
 
 sub is_eq {
     my($self, $got, $expect, $name) = @_;
@@ -280,7 +280,7 @@ DIAGNOSTIC
 
 }    
 
-#line 438
+#line 437
 
 sub isnt_eq {
     my($self, $got, $dont_expect, $name) = @_;
@@ -315,7 +315,7 @@ sub isnt_num {
 }
 
 
-#line 490
+#line 489
 
 sub like {
     my($self, $this, $regex, $name) = @_;
@@ -331,7 +331,7 @@ sub unlike {
     $self->_regex_ok($this, $regex, '!~', $name);
 }
 
-#line 531
+#line 530
 
 
 sub maybe_regex {
@@ -380,7 +380,7 @@ DIAGNOSTIC
     return $ok;
 }
 
-#line 588
+#line 587
 
 sub cmp_ok {
     my($self, $got, $type, $expect, $name) = @_;
@@ -418,7 +418,7 @@ sub _cmp_diag {
 DIAGNOSTIC
 }
 
-#line 636
+#line 635
 
 sub BAILOUT {
     my($self, $reason) = @_;
@@ -427,7 +427,7 @@ sub BAILOUT {
     exit 255;
 }
 
-#line 652
+#line 651
 
 sub skip {
     my($self, $why) = @_;
@@ -462,7 +462,7 @@ sub skip {
 }
 
 
-#line 697
+#line 696
 
 sub todo_skip {
     my($self, $why) = @_;
@@ -498,7 +498,7 @@ sub todo_skip {
 }
 
 
-#line 772
+#line 771
 
 sub level {
     my($self, $level) = @_;
@@ -512,7 +512,7 @@ sub level {
 $CLASS->level(1);
 
 
-#line 809
+#line 808
 
 my $Use_Nums = 1;
 sub use_numbers {
@@ -524,7 +524,7 @@ sub use_numbers {
     return $Use_Nums;
 }
 
-#line 836
+#line 835
 
 my($No_Header, $No_Ending) = (0,0);
 sub no_header {
@@ -546,7 +546,7 @@ sub no_ending {
 }
 
 
-#line 891
+#line 890
 
 sub diag {
     my($self, @msgs) = @_;
@@ -571,7 +571,7 @@ sub diag {
     return 0;
 }
 
-#line 926
+#line 925
 
 sub _print {
     my($self, @msgs) = @_;
@@ -595,7 +595,7 @@ sub _print {
 }
 
 
-#line 977
+#line 976
 
 my($Out_FH, $Fail_FH, $Todo_FH);
 sub output {
@@ -667,7 +667,7 @@ sub _autoflush {
 }
 
 
-#line 1065
+#line 1064
 
 sub current_test {
     my($self, $num) = @_;
@@ -699,7 +699,7 @@ sub current_test {
 }
 
 
-#line 1106
+#line 1105
 
 sub summary {
     my($self) = shift;
@@ -707,13 +707,13 @@ sub summary {
     return map { $_->{'ok'} } @Test_Results;
 }
 
-#line 1161
+#line 1160
 
 sub details {
     return @Test_Results;
 }
 
-#line 1185
+#line 1184
 
 sub todo {
     my($self, $pack) = @_;
@@ -725,7 +725,7 @@ sub todo {
                                      : 0;
 }
 
-#line 1205
+#line 1204
 
 sub caller {
     my($self, $height) = @_;
@@ -735,9 +735,9 @@ sub caller {
     return wantarray ? @caller : $caller[0];
 }
 
-#line 1217
+#line 1216
 
-#line 1231
+#line 1230
 
 #'#
 sub _sanity_check {
@@ -748,7 +748,7 @@ sub _sanity_check {
           'Somehow you got a different number of results than tests ran!');
 }
 
-#line 1250
+#line 1249
 
 sub _whoa {
     my($check, $desc) = @_;
@@ -760,7 +760,7 @@ WHOA
     }
 }
 
-#line 1271
+#line 1270
 
 sub _my_exit {
     $? = $_[0];
@@ -769,7 +769,7 @@ sub _my_exit {
 }
 
 
-#line 1284
+#line 1283
 
 $SIG{__DIE__} = sub {
     # We don't want to muck with death in an eval, but $^S isn't
@@ -862,6 +862,6 @@ END {
     $Test->_ending if defined $Test and !$Test->no_ending;
 }
 
-#line 1407
+#line 1406
 
 1;

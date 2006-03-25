@@ -1,4 +1,4 @@
-# Copyright (c) 2003 Graham Barr, Djamel Boudjerda, Paul Connolly, Julian Onions and Nexor.
+# Copyright (c) 2003-2005 Graham Barr, Djamel Boudjerda, Paul Connolly, Julian Onions and Nexor.
 # All rights reserved. This program is free software; you can redistribute 
 # it and/or modify it under the same terms as Perl itself.
 
@@ -10,7 +10,7 @@ use strict;
 use vars qw($VERSION @ISA $CNONCE);
 use Digest::MD5 qw(md5_hex md5);
 
-$VERSION = "1.04";
+$VERSION = "1.05";
 @ISA = qw(Authen::SASL::Perl);
 
 my %secflags = (
@@ -20,6 +20,9 @@ my %secflags = (
 
 # some have to be quoted - some don't - sigh!
 my %qdval; @qdval{qw(username authzid realm nonce cnonce digest-uri)} = ();
+
+my %multi; @multi{qw(realm auth-param)} = ();
+my @required = qw(algorithm nonce);
 
 sub _order { 3 }
 sub _secflags {
@@ -43,28 +46,53 @@ sub client_step    # $self, $server_sasl_credentials
   while($challenge =~ s/^(?:\s*,)?\s*(\w+)=("([^\\"]+|\\.)*"|[^,]+)\s*//) {
     my ($k, $v) = ($1,$2);
     if ($v =~ /^"(.*)"$/s) {
-      ($v = $1) =~ s/\\//g;
+      ($v = $1) =~ s/\\(.)/$1/g;
     }
-    $sparams{$k} = $v;
+    if (exists $multi{$k}) {
+      my $aref = $sparams{$k} ||= [];
+      push @$aref, $v;
+    }
+    elsif (defined $sparams{$k}) {
+      return $self->set_error("Bad challenge: '$challenge'");
+    }
+    else {
+      $sparams{$k} = $v;
+    }
   }
 
   return $self->set_error("Bad challenge: '$challenge'")
     if length $challenge;
 
+  # qop in server challenge is optional: if not there "auth" is assumed
   return $self->set_error("Server does not support auth (qop = $sparams{'qop'})")
-    unless grep { /^auth$/ } split(/,/, $sparams{'qop'});
+    if ($sparams{qop} && ! grep { /^auth$/ } split(/,/, $sparams{'qop'}));
+
+  # check required fields in server challenge
+  if (my @missing = grep { !exists $sparams{$_} } @required) {
+    return $self->set_error("Server did not provide required field(s): @missing")
+  }
 
   my %response = (
     nonce        => $sparams{'nonce'},
-    username     => $self->_call('user'),
-    realm        => $sparams{'realm'},
-    nonce        => $sparams{'nonce'},
     cnonce       => md5_hex($CNONCE || join (":", $$, time, rand)),
     'digest-uri' => $self->service . '/' . $self->host,
-    qop          => 'auth',
+    qop          => 'auth',		# we currently support 'auth' only
+    # calc how often the server nonce has been seen; server expects "00000001"
     nc           => sprintf("%08d",     ++$self->{nonce}{$sparams{'nonce'}}),
     charset      => $sparams{'charset'},
   );
+
+  # let caller-provided fields override defaults: authorization ID, service name, realm
+
+  my $s_realm = $sparams{realm} || [];
+  my $realm = $self->_call('realm', @$s_realm);
+  unless (defined $realm) {
+    # If the user does not pick a realm, use the first from the server
+    $realm = $s_realm->[0];
+  }
+  if (defined $realm) {
+    $response{realm} = $realm;
+  }
 
   my $authzid = $self->_call('authname');
   if (defined $authzid) {
@@ -73,15 +101,23 @@ sub client_step    # $self, $server_sasl_credentials
 
   my $serv_name = $self->_call('serv');
   if (defined $serv_name) {
-    $response{'digest_uri'} .= '/' . $serv_name;
+    $response{'digest-uri'} .= '/' . $serv_name;
   }
 
+  my $user = $self->_call('user');
+  return $self->set_error("Username is required")
+    unless defined $user;
+  $response{username} = $user;
+
   my $password = $self->_call('pass');
+  return $self->set_error("Password is required")
+    unless defined $password;
 
   # Generate the response value
 
+  $realm = "" unless defined $realm;
   my $A1 = join (":", 
-    md5(join (":", @response{qw(username realm)}, $password)),
+    md5(join (":", $user, $realm, $password)),
     @response{defined($authzid) ? qw(nonce cnonce authzid) : qw(nonce cnonce)}
   );
 
@@ -162,6 +198,14 @@ The password to be used in the response
 
 The service name when authenticating to a replicated service
 
+=item realm
+
+The authentication realm when overriding the server-provided default.
+If not given the server-provided value is used.
+
+The callback will be passed the list of realms that the server provided
+in the initial response.
+
 =back
 
 =head1 SEE ALSO
@@ -170,16 +214,16 @@ L<Authen::SASL>,
 L<Authen::SASL::Perl>
 
 =head1 AUTHORS
- 
-Graham Barr, Djamel Boudjerda (NEXOR) Paul Connolly, Julian Onions (NEXOR)
+
+Graham Barr, Djamel Boudjerda (NEXOR), Paul Connolly, Julian Onions (NEXOR)
 
 Please report any bugs, or post any suggestions, to the perl-ldap mailing list
 <perl-ldap@perl.org>
 
 =head1 COPYRIGHT 
 
-Copyright (c) 2003 Graham Barr, Djamel Boudjerda, Paul Connolly, Julian Onions
-and Nexor.
+Copyright (c) 2003-2005 Graham Barr, Djamel Boudjerda, Paul Connolly,
+Julian Onions, Nexor and Peter Marschall.
 All rights reserved. This program is free software; you can redistribute 
 it and/or modify it under the same terms as Perl itself.
 

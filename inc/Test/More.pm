@@ -1,4 +1,4 @@
-#line 1 "inc/Test/More.pm - /System/Library/Perl/5.8.1/Test/More.pm"
+#line 1
 package Test::More;
 
 use 5.004;
@@ -47,7 +47,7 @@ sub _export_to_level
 }
 
 
-#line 172
+#line 171
 
 sub plan {
     my(@plan) = @_;
@@ -76,14 +76,14 @@ sub import {
 }
 
 
-#line 266
+#line 265
 
 sub ok ($;$) {
     my($test, $name) = @_;
     $Test->ok($test, $name);
 }
 
-#line 330
+#line 329
 
 sub is ($$;$) {
     $Test->is_eq(@_);
@@ -96,28 +96,28 @@ sub isnt ($$;$) {
 *isn't = \&isnt;
 
 
-#line 371
+#line 370
 
 sub like ($$;$) {
     $Test->like(@_);
 }
 
 
-#line 385
+#line 384
 
 sub unlike {
     $Test->unlike(@_);
 }
 
 
-#line 423
+#line 422
 
 sub cmp_ok($$$;$) {
     $Test->cmp_ok(@_);
 }
 
 
-#line 457
+#line 456
 
 sub can_ok ($@) {
     my($proto, @methods) = @_;
@@ -147,7 +147,7 @@ sub can_ok ($@) {
     return $ok;
 }
 
-#line 514
+#line 513
 
 sub isa_ok ($$;$) {
     my($object, $class, $obj_name) = @_;
@@ -201,7 +201,7 @@ WHOA
 }
 
 
-#line 583
+#line 582
 
 sub pass (;$) {
     $Test->ok(1, @_);
@@ -211,14 +211,14 @@ sub fail (;$) {
     $Test->ok(0, @_);
 }
 
-#line 627
+#line 626
 
 sub diag {
     $Test->diag(@_);
 }
 
 
-#line 677
+#line 676
 
 sub use_ok ($;@) {
     my($module, @imports) = @_;
@@ -247,7 +247,7 @@ DIAGNOSTIC
     return $ok;
 }
 
-#line 712
+#line 711
 
 sub require_ok ($) {
     my($module) = shift;
@@ -274,7 +274,7 @@ DIAGNOSTIC
     return $ok;
 }
 
-#line 796
+#line 795
 
 #'#
 sub skip {
@@ -296,7 +296,7 @@ sub skip {
 }
 
 
-#line 874
+#line 873
 
 sub todo_skip {
     my($why, $how_many) = @_;
@@ -316,7 +316,7 @@ sub todo_skip {
     last TODO;
 }
 
-#line 933
+#line 932
 
 use vars qw(@Data_Stack);
 my $DNE = bless [], 'Does::Not::Exist';
@@ -383,7 +383,7 @@ sub _format_stack {
 }
 
 
-#line 1007
+#line 1006
 
 #'#
 sub eq_array  {
@@ -452,7 +452,7 @@ sub _deep_check {
 }
 
 
-#line 1083
+#line 1082
 
 sub eq_hash {
     my($a1, $a2) = @_;
@@ -474,7 +474,7 @@ sub eq_hash {
     return $ok;
 }
 
-#line 1116
+#line 1115
 
 # We must make sure that references are treated neutrally.  It really
 # doesn't matter how we sort them, as long as both arrays are sorted
@@ -489,12 +489,12 @@ sub eq_set  {
     return eq_array( [sort _bogus_sort @$a1], [sort _bogus_sort @$a2] );
 }
 
-#line 1154
+#line 1153
 
 sub builder {
     return Test::Builder->new;
 }
 
-#line 1247
+#line 1246
 
 1;
