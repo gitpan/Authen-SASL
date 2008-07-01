@@ -8,6 +8,7 @@ abstract	('SASL Authentication framework');
 author		('Graham Barr <gbarr@pobox.com>');
 version_from	('lib/Authen/SASL.pm');
 license		('perl');
+repository      ('git://git.goingon.net/Authen-SASL.git');
 
 check_nmake();      # check and download nmake.exe for Win32
 
@@ -20,6 +21,7 @@ features(
   'DIGEST-MD5 mechanism' => [
     -default => 1,
     'Digest::MD5'  => 0,
+    'Digest::HMAC_MD5'  => 0,
   ],
   'CRAM-MD5 mechanism' => [
     -default => 0,
