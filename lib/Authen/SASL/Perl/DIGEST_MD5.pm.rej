@@ -1,0 +1,77 @@
+***************
+*** 88,100 ****
+    return $self->set_error("Bad challenge: '$challenge'")
+      if length $challenge;
+  
+    # qop in server challenge is optional: if not there "auth" is assumed
+    return $self->set_error("Server does not support auth (qop = $sparams{'qop'})")
+      if ($sparams{qop} && ! grep { /^auth$/ } split(/,/, $sparams{'qop'}));
+  
+-   # check required fields in server challenge
+    if (my @missing = grep { !exists $sparams{$_} } @required) {
+-     return $self->set_error("Server did not provide required field(s): @missing")
+    }
+  
+    my %response = (
+--- 89,126 ----
+    return $self->set_error("Bad challenge: '$challenge'")
+      if length $challenge;
+  
++   $self->{challenge_count} += 1;
++ 
+    # qop in server challenge is optional: if not there "auth" is assumed
+    return $self->set_error("Server does not support auth (qop = $sparams{'qop'})")
+      if ($sparams{qop} && ! grep { /^auth$/ } split(/,/, $sparams{'qop'}));
+  
++   # check required fields in server challenge, but only on first iteration
+    if (my @missing = grep { !exists $sparams{$_} } @required) {
++     if ($self->{challenge_count} < 2) {
++       return $self->set_error("Server did not provide required field(s): @missing")
++     }
++   }
++ 
++   if ($self->{challenge_count} > 2) {
++     return $self->set_error("Too many challenge iterations for DIGEST-MD5");
++   }
++   if ($self->{challenge_count} == 2) {
++     unless (exists $sparams{'rspauth'}) {
++       return $self->set_error("Missing second stage rspauth data");
++     }
++     foreach my $k ('digest_uri', 'response_prefix') {
++       unless (exists $self->{$k}) {
++ 	return $self->set_error("Lost our $k field");
++       }
++     }
++     my $step3_A2 = ':' . $self->{'digest_uri'};
++     # If supporting protection layers, there's an extra field here
++     my $step3 = md5_hex($self->{'response_prefix'} . md5_hex($step3_A2));
++     if ($sparams{'rspauth'} ne $step3) {
++       return $self->set_error("Server failed final verification.");
++     }
++     return '';
+    }
+  
+    my %response = (
+***************
+*** 151,159 ****
+    $A2 .= ":00000000000000000000000000000000"
+      if $response{'qop'} and $response{'qop'} =~ /^auth-(conf|int)$/;
+  
+-   $response{'response'} = md5_hex(
+-     join (":", md5_hex($A1), @response{qw(nonce nc cnonce qop)}, md5_hex($A2))
+-   );
+  
+    join (",", map { _qdval($_, $response{$_}) } sort keys %response);
+  }
+--- 177,187 ----
+    $A2 .= ":00000000000000000000000000000000"
+      if $response{'qop'} and $response{'qop'} =~ /^auth-(conf|int)$/;
+  
++   my $response_prefix = join (":", md5_hex($A1), @response{qw(nonce nc cnonce qop)}, '');
++   $response{'response'} = md5_hex($response_prefix . md5_hex($A2));
++ 
++   $self->{digest_uri} = $response{'digest-uri'};
++   $self->{response_prefix} = $response_prefix;
+  
+    join (",", map { _qdval($_, $response{$_}) } sort keys %response);
+  }
