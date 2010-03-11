@@ -19,17 +19,13 @@ lib/Authen/SASL/Perl.pod
 lib/Authen/SASL/Perl/ANONYMOUS.pm
 lib/Authen/SASL/Perl/CRAM_MD5.pm
 lib/Authen/SASL/Perl/DIGEST_MD5.pm
-lib/Authen/SASL/Perl/DIGEST_MD5.pm.orig
-lib/Authen/SASL/Perl/DIGEST_MD5.pm.rej
 lib/Authen/SASL/Perl/EXTERNAL.pm
-lib/Authen/SASL/Perl/EXTERNAL.pm.orig
 lib/Authen/SASL/Perl/GSSAPI.pm
 lib/Authen/SASL/Perl/LOGIN.pm
 lib/Authen/SASL/Perl/PLAIN.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
-META.yml
 SIGNATURE
 t/anon.t
 t/callback.t
@@ -37,6 +33,13 @@ t/cram_md5.t
 t/digest_md5.t
 t/digest_md5_verified.t
 t/external.t
+t/lib/common.pl
 t/login.t
+t/negotiations/digest_md5.t
+t/negotiations/login.t
+t/negotiations/plain.t
 t/order.t
 t/plain.t
+t/server/digest_md5.t
+t/server/login.t
+t/server/plain.t
