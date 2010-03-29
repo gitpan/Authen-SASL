@@ -14,22 +14,23 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 861ac54a4cab8944ddd140e90538279fc3e75adc Changes
-SHA1 646a87a010d87b3c74a92b09db7518511601f215 MANIFEST
+SHA1 ead88ab7f0116246edbaedf5bc646d88ece4b270 Changes
+SHA1 e8a4bccd71bb2a65e047160d57769d30ada1e6c9 MANIFEST
 SHA1 76ce2a83a03713855f54e0f0f13093bab0f5de6d MANIFEST.SKIP
+SHA1 81015bd0fa16bb4ca02accc1f6600425e4d8e386 META.yml
 SHA1 30e38ea2e9ae64de8ddbf1529b823c930df7ac54 Makefile.PL
 SHA1 d458613a6aef99468b37defcbf8321ec7c88fe76 api.txt
 SHA1 81644069dc4507a71e4cfeef20780fee6c7ee00a compat_pl
 SHA1 fe659c6b2d6041f944072b9aa1e4ff3a49381e36 example_pl
-SHA1 fd5f3c4f0418efee3b9b16cf8c3902e8374909df inc/Module/Install.pm
-SHA1 7cd7c349afdf3f012e475507b1017bdfa796bfbd inc/Module/Install/Base.pm
-SHA1 ba186541bbf6439111f01fc70769cf24d22869bf inc/Module/Install/Can.pm
-SHA1 aaa50eca0d7751db7a4d953fac9bc72c6294e238 inc/Module/Install/Fetch.pm
-SHA1 3e83972921d54198d1246f7278f08664006cd65d inc/Module/Install/Makefile.pm
-SHA1 12bf1867955480d47d5171a9e9c6a96fabe0b58f inc/Module/Install/Metadata.pm
-SHA1 f7ee667e878bd2faf22ee9358a7b5a2cc8e91ba4 inc/Module/Install/Win32.pm
-SHA1 8ed29d6cf217e0977469575d788599cbfb53a5ca inc/Module/Install/WriteAll.pm
-SHA1 39175f5ed1bb989e1703af372170a5d7cced81a5 lib/Authen/SASL.pm
+SHA1 1ebec4119486a032a5612a403e8d7b7be973e938 inc/Module/Install.pm
+SHA1 24038af925a69df41972971356ccce885b0fe2ad inc/Module/Install/Base.pm
+SHA1 8f96eddfef548c9328457fbb17a121631cda356b inc/Module/Install/Can.pm
+SHA1 ec29048e48edd9c9c55f9de7b773bd7c904335ad inc/Module/Install/Fetch.pm
+SHA1 0384525d85d51e99532e3ad8729d870113646d14 inc/Module/Install/Makefile.pm
+SHA1 38c657de4d91f5a60ff8e6c6f6a5547daf7c4ab2 inc/Module/Install/Metadata.pm
+SHA1 5c25f1104c0038041e3b93e0660c39171e4caf2b inc/Module/Install/Win32.pm
+SHA1 94d47349c803c4bd2a9230d25e4db0b6aaf1acd8 inc/Module/Install/WriteAll.pm
+SHA1 80e9c208e23fb7246180def17db1e664b330b924 lib/Authen/SASL.pm
 SHA1 ef5e0a8a3c4ca083d307ab603b7a5a028d2cbf99 lib/Authen/SASL.pod
 SHA1 81c1f6d65fb94ebf36e3928558d0f50b4968e2be lib/Authen/SASL/CRAM_MD5.pm
 SHA1 dabe43f97abab76f875643defe311e7e29e46895 lib/Authen/SASL/EXTERNAL.pm
@@ -61,7 +62,7 @@ SHA1 5536df8fd14d2adf71c0508d35fd1c317d283601 t/server/plain.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (Darwin)
 
-iEYEARECAAYFAkuZB5QACgkQR0BL4gbYw3RS+wCeJYnlG8k7UA1H54u23GKv3vlc
-HqcAniK/tDXi9Bxr3UKJn9xbG+aB0ss0
-=EOX6
+iEYEARECAAYFAkuw/nQACgkQR0BL4gbYw3Q6cwCeKdnh8LPGUGpC75mEziu1Jru1
+MsgAn1Xu3/089JXKb/pWk3CK/eOqfaGa
+=RJCA
 -----END PGP SIGNATURE-----
