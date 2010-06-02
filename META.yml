@@ -27,4 +27,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/gbarr/perl-authen-sasl
-version: 2.1401
+version: 2.15

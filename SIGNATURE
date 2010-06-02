@@ -14,10 +14,10 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 ead88ab7f0116246edbaedf5bc646d88ece4b270 Changes
+SHA1 f588621ba950f29ab4d0b7635cd7fe1d0acab746 Changes
 SHA1 e8a4bccd71bb2a65e047160d57769d30ada1e6c9 MANIFEST
 SHA1 76ce2a83a03713855f54e0f0f13093bab0f5de6d MANIFEST.SKIP
-SHA1 81015bd0fa16bb4ca02accc1f6600425e4d8e386 META.yml
+SHA1 169c92712c34939ff317c772ff87fbd63d917c77 META.yml
 SHA1 30e38ea2e9ae64de8ddbf1529b823c930df7ac54 Makefile.PL
 SHA1 d458613a6aef99468b37defcbf8321ec7c88fe76 api.txt
 SHA1 81644069dc4507a71e4cfeef20780fee6c7ee00a compat_pl
@@ -30,7 +30,7 @@ SHA1 0384525d85d51e99532e3ad8729d870113646d14 inc/Module/Install/Makefile.pm
 SHA1 38c657de4d91f5a60ff8e6c6f6a5547daf7c4ab2 inc/Module/Install/Metadata.pm
 SHA1 5c25f1104c0038041e3b93e0660c39171e4caf2b inc/Module/Install/Win32.pm
 SHA1 94d47349c803c4bd2a9230d25e4db0b6aaf1acd8 inc/Module/Install/WriteAll.pm
-SHA1 80e9c208e23fb7246180def17db1e664b330b924 lib/Authen/SASL.pm
+SHA1 4bb43826d7ed6484737df5cee2c78d996efe6c59 lib/Authen/SASL.pm
 SHA1 ef5e0a8a3c4ca083d307ab603b7a5a028d2cbf99 lib/Authen/SASL.pod
 SHA1 81c1f6d65fb94ebf36e3928558d0f50b4968e2be lib/Authen/SASL/CRAM_MD5.pm
 SHA1 dabe43f97abab76f875643defe311e7e29e46895 lib/Authen/SASL/EXTERNAL.pm
@@ -41,8 +41,8 @@ SHA1 1dcf4897403f3721b3ce18afc6589f6fd1155836 lib/Authen/SASL/Perl/CRAM_MD5.pm
 SHA1 6c60d02b4f05762f0e6e5d9faf2e06e0acbd25a7 lib/Authen/SASL/Perl/DIGEST_MD5.pm
 SHA1 c4fce50b535c88ccddf6c844faf0870c52a3c90e lib/Authen/SASL/Perl/EXTERNAL.pm
 SHA1 7c9facb2f8b81c430d1fd530a634e8cfc67e33f6 lib/Authen/SASL/Perl/GSSAPI.pm
-SHA1 2239365f6d105a5f855593a7ec5d5d361de033d0 lib/Authen/SASL/Perl/LOGIN.pm
-SHA1 16c6c896c4817309950c737f2cc36a355b244c03 lib/Authen/SASL/Perl/PLAIN.pm
+SHA1 e6eb9dcf283d92e9962b9df4d9805672b4d56a50 lib/Authen/SASL/Perl/LOGIN.pm
+SHA1 205ba41fe5d77fa431f1c41f00ba695794695da8 lib/Authen/SASL/Perl/PLAIN.pm
 SHA1 be0c439da3f8f1740fa8b623cee9662946a62c3f t/anon.t
 SHA1 2f0bc82458a42b9b2e9cf5792abb1611ee2fc2e7 t/callback.t
 SHA1 b638f32f3215163b607c509a55026bafa5c5edfc t/cram_md5.t
@@ -57,12 +57,12 @@ SHA1 f29686ef395890edd3d06f174223cf91c6afbe90 t/negotiations/plain.t
 SHA1 6a6c9fa037cdaf24091524cc399f9cc799547732 t/order.t
 SHA1 0d3df2efa70ae53bf021707aae435fe54d96cc95 t/plain.t
 SHA1 7bb229401b5a9d207594a24ecd5581f2a10ddfae t/server/digest_md5.t
-SHA1 2f4b83d5de685bd12e6a29cb3ee46389892167de t/server/login.t
-SHA1 5536df8fd14d2adf71c0508d35fd1c317d283601 t/server/plain.t
+SHA1 d653eeffdeb48bedbdafaf1d95cf307e072d0804 t/server/login.t
+SHA1 b6ca8bd0a0ddaca6db8b2641592b341655b39ae8 t/server/plain.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (Darwin)
 
-iEYEARECAAYFAkuw/nQACgkQR0BL4gbYw3Q6cwCeKdnh8LPGUGpC75mEziu1Jru1
-MsgAn1Xu3/089JXKb/pWk3CK/eOqfaGa
-=RJCA
+iEYEARECAAYFAkwGqUcACgkQR0BL4gbYw3SYiwCeMDc2B1nNdx0hz1zR2dN3uZCs
+FVEAn2/C5oS8xKQJjpVNxmwcyyjVC8aI
+=S5F4
 -----END PGP SIGNATURE-----
